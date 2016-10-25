@@ -14,6 +14,6 @@ var HomeController = {
 	  console.log(usuario);
  	  response.send('Olá usuario');
 	}
-}
+};
 
 module.exports = HomeController;

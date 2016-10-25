@@ -3,3 +3,6 @@ Iniciar a aplicação:
 
 Validar codigo:
 	npm run-script jshint
+
+Teste  unitario (TDD):
+	npm run-script spec
