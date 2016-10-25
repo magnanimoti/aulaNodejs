@@ -103,7 +103,6 @@ describe("Modelo de usuario", function(){
 							expect(retorno4.error).toBe(false);
 							done();
 						});
-						console.log(usuario);
 					});
 				});
 			});
