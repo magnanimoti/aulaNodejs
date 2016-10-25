@@ -6,10 +6,11 @@ var HomeController = {
 	},
 	usuario: function(request, response, next) {
 	  var usuario = new Usuario();
-	  usuario.nome = "Edlaine";
-	  usuario.email = "di@di";
+	  usuario.id = 10;
+	  usuario.nome = "ricardo6";
+	  usuario.email = "jo@jo";
 	  usuario.senha= "12A3";
-	  usuario.login = "dy";
+	  usuario.login = "jo";
 	  usuario.salvar();
 	  console.log(usuario);
  	  response.send('Olá usuario');
