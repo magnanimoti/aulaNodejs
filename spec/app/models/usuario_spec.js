@@ -49,6 +49,25 @@ describe("Modelo de usuario", function(){
 	});
 
 	describe(" metodo", function(){
+		it(" [buscar por id] da base de dados",function(done){
+			Usuario.truncateTable(function(retorno1){
+				var usuario = new Usuario();
+				usuario.nome="usuario";
+				usuario.email="user@user";
+				usuario.senha="****";
+				usuario.login="user";
+				usuario.salvar(function(retorno2){
+					Usuario.buscarPorId(1, function(retorno3){
+						expect(retorno3.error).toBe(false);
+						expect(retorno3.usuario.id).toBe(1);
+						done();
+					});
+				});
+			});
+		});
+	});
+
+	describe(" metodo", function(){
 		it(" [todos] da base de dados",function(done){
 
 			Usuario.excluirTodos(function(retorno1){

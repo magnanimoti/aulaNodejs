@@ -77,14 +77,50 @@ Usuario.todos = function(callback){
 			callback.call(null, {
 				error: true, 
 				mesage: err.message, 
-				usuarios: []});
+				usuarios: []
+			});
 		}else{
 			callback.call(null,{
 				error: false, 
-				usuarios: rows});
+				usuarios: rows
+			});
+		}
+	});
+};
+
+Usuario.buscarPorId = function(id, callback){
+	query = "SELECT * FROM usuarios WHERE id =" + id + ";";
+	db.cnn.exec(query, function (rows, err) {
+		if(err !== undefined && err !== null){
+			callback.call(null, {
+				error: true, 
+				mesage: err.message, 
+				usuarios: {}
+			});
+		}else{
+			if(rows.length > 0){
+				callback.call(null,{
+					error: false, 
+					usuario: rows[0]
+				});	
+			}else{
+				callback.call(null,{
+					error: false, 
+					usuario: {}
+				});
+			}
+		}
+	});
+};
+Usuario.truncateTable = function(callback){
+	query = "TRUNCATE usuarios;";
+	db.cnn.exec(query, function (rows, err) {
+		if(err !== undefined && err !== null){
+			callback.call(null, {error: true, mesage: err.message});
+		}else{
+			callback.call(null,{error: false});
 		}
 				// body...
 	});
 };
-
 module.exports = Usuario;
