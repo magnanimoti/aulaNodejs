@@ -6,7 +6,10 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', HomeController.index);
 router.get('/usuario', HomeController.usuario);
+
 router.get('/usuarios.json', UsuariosController.todos);
+router.post('/usuarios.json', UsuariosController.criar);
 router.get('/usuarios/:id.json', UsuariosController.porId);
+
 
 module.exports = router;

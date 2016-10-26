@@ -28,7 +28,7 @@ describe("Controle de usuarios", function(){
 				}else{
 					expect(response.statusCode).toBe(200);
 					var json = JSON.parse(response.body);
-					//console.log(json); 
+	    			//console.log(json); 
 					expect(json.length).toBe(1);	
 					expect(json[0].nome).toBe("user");
 				}	
@@ -54,7 +54,7 @@ describe("Controle de usuarios", function(){
 						}else{
 							expect(response.statusCode).toBe(200);
 							var json = JSON.parse(response.body);
-							console.log(json); 
+							//console.log(json); 
 							expect(json.id).toBe(1);
 							expect(json.nome).not.toBe(undefined);	
 						}	
@@ -64,6 +64,24 @@ describe("Controle de usuarios", function(){
 			});
 
 			
+		});	
+	});
+	describe(" POST /usuarios.json criar [usuario]", function(){
+		it("returns status code 200 e [usuario] criado",function(done){
+			request.post({url:host +"/usuarios.json",form: {nome:'user2', email: 'user2@user2', senha: '***', login: 'user2'}}, function(error, response, body){
+				if(response === undefined){
+					console.log("Não consegui localizar o servidor");
+					expect(503).toBe(200);
+				}else{
+
+					expect(response.statusCode).toBe(201);
+
+					var json = JSON.parse(response.body);
+					//console.log(json); 	
+					expect(json.mensagem).toBe("Usuario criado com sucesso");
+				}	
+				done();
+			});
 		});	
 	});
 

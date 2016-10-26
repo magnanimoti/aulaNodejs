@@ -1,4 +1,5 @@
 var Usuario = require('../../../app/models/usuario');
+
 describe("Modelo de usuario", function(){
 	describe(" atributo", function(){
 		it(" [id].",function(){
@@ -131,4 +132,5 @@ describe("Modelo de usuario", function(){
 			});
 		});
 	});
+
 });

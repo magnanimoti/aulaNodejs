@@ -36,6 +36,22 @@ var UsuariosController = {
 				response.status(200).send(retorno.usuario);
 			}
 		});
+	},
+	criar: function(request,response, next){
+		var usuario = new Usuario();
+		usuario.nome=request.body.nome;
+		usuario.email=request.body.email;
+		usuario.senha=request.body.senha;
+		usuario.login=request.body.login;
+		usuario.salvar(function(retorno){
+			if(retorno.error){
+				response.status(500).send({
+					error: 'erro ao cadastrar usuario  (' + retorno.message + ')'
+				});
+			}else{
+				response.status(201).send({mensagem: 'Usuario criado com sucesso'});
+			}
+		});
 	}
 };
 
