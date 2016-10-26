@@ -25,6 +25,17 @@ var UsuariosController = {
 
 			});	
 		}	
+	},
+	porId: function(request,response, next){
+		Usuario.buscarPorId(request.params.id, function(retorno){
+			if(retorno.error){
+				response.status(500).send({
+					error: 'erro ao buscar usuario por id (' + retorno.message + ')'
+				});
+			}else{
+				response.status(200).send(retorno.usuario);
+			}
+		});
 	}
 };
 
