@@ -2,16 +2,29 @@ var Usuario = require('../models/usuario');
 
 var UsuariosController = {
 	todos: function(request, response, next) {
-	Usuario.todos(function(retorno){
-		if(retorno.error){
-			response.status(500).send({
-				error: 'erro ao buscar usuario (' + retorno.message + ')'
+		if(request.query.nome !== undefined){
+			Usuario.buscarPorNome(request.query.nome, function(retorno){
+				if(retorno.error){
+					response.status(500).send({
+						error: 'erro ao buscar usuario por nome (' + request.query.nome + ') - (' + retorno.message + ')'
+					});
+				}else{
+					response.status(200).send(retorno.usuarios);
+				}
+
 			});
 		}else{
-			response.status(200).send(retorno.usuarios);
-		}
+			Usuario.todos(function(retorno){
+				if(retorno.error){
+					response.status(500).send({
+						error: 'erro ao buscar usuarios (' + retorno.message + ')'
+					});
+				}else{
+					response.status(200).send(retorno.usuarios);
+				}
 
-	});
+			});	
+		}	
 	}
 };
 

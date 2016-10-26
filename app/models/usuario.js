@@ -95,7 +95,7 @@ Usuario.buscarPorId = function(id, callback){
 			callback.call(null, {
 				error: true, 
 				mesage: err.message, 
-				usuarios: {}
+				usuario: {}
 			});
 		}else{
 			if(rows.length > 0){
@@ -112,6 +112,32 @@ Usuario.buscarPorId = function(id, callback){
 		}
 	});
 };
+
+Usuario.buscarPorNome = function(nome, callback){
+	query = "SELECT * FROM usuarios WHERE nome like '%" + nome + "%';";
+	db.cnn.exec(query, function (rows, err) {
+		if(err !== undefined && err !== null){
+			callback.call(null, {
+				error: true, 
+				mesage: err.message, 
+				usuarios: []
+			});
+		}else{
+			if(rows.length > 0){
+				callback.call(null,{
+					error: false, 
+					usuarios: rows
+				});	
+			}else{
+				callback.call(null,{
+					error: false, 
+					usuarios: []
+				});
+			}
+		}
+	});
+};
+
 Usuario.truncateTable = function(callback){
 	query = "TRUNCATE usuarios;";
 	db.cnn.exec(query, function (rows, err) {

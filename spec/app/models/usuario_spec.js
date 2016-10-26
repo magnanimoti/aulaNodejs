@@ -108,4 +108,27 @@ describe("Modelo de usuario", function(){
 			});
 		});
 	});
+
+
+	describe(" metodo", function(){
+		it(" [busca por nome] da base de dados",function(done){
+
+			Usuario.excluirTodos(function(retorno1){
+				var nome = "user";
+				var usuario = new Usuario({nome: nome , email: "user@user", senha: "****", login: "user"});
+				usuario.salvar(function(retorno2){
+					var usuario2 = new Usuario({nome: "test", email: "user1@user1", senha: "****", login: "user1"});
+					usuario2.salvar(function(retorno3){
+						Usuario.buscarPorNome(nome, function(retorno4){
+							//console.log(retorno4);
+							expect(retorno4.error).toBe(false);
+							expect(retorno4.usuarios.length).toBe(1);
+							expect(retorno4.usuarios[0].nome).toBe(nome);
+							done();
+						});
+					});
+				});
+			});
+		});
+	});
 });
